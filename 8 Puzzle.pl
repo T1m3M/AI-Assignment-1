@@ -6,7 +6,7 @@
 	%	?- puzzle8( [ [1,2,3],[4,5,6],[7,x,8] ] , [ [1,2,3],[4,5,6],[7,8,x] ] ,Solution).
 
 puzzle8(Start,Goal,Solution) :-
-solution(Start,Goal,Solution).
+getpath(Start,Goal,Solution).
 
 % horizontal moves
 move([[x,A,B],[C,D,E],[F,G,H]],[[A,x,B],[C,D,E],[F,G,H]],A).
@@ -26,10 +26,10 @@ move([[A,B,C],[D,E,x],[F,G,H]],[[A,B,C],[D,E,H],[F,G,x]],H).
 
 
 removed(H,[H|_]).
-solution(State,State,[]).
-solution(StateA,EndState,[H|T]) :-
-	solution(StateB,EndState,T),
-	(move(StateA,StateB,H) ; move(StateB,StateA,H)),
-	\+(removed(H,T)).
+getpath(State,State,[]).
+getpath(StateA,EndState,[H|T]) :-
+getpath(StateB,EndState,T),
+       (move(StateA,StateB,H) ; move(StateB,StateA,H)),
+        \+ removed(H,T).
 
 
